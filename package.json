@@ -1,0 +1,32 @@
+{
+  "name": "tastyorders",
+  "version": "1.0.0",
+  "description": "TastyOrders is a fod ordering web app created using ReactJS.",
+  "main": "app.js",
+  "scripts": {
+    "dev": "parcel index.html --open",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VaibhavSinghDev/TastyOrders.git"
+  },
+  "author": "Vaibhav Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VaibhavSinghDev/TastyOrders/issues"
+  },
+  "homepage": "https://github.com/VaibhavSinghDev/TastyOrders#readme",
+  "devDependencies": {
+    "parcel": "^2.9.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
