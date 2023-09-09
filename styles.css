@@ -39,30 +39,38 @@ a:visited {
 }
 
 .restaurant-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .restaurant-card {
   display: flex;
   flex-direction: column;
-  margin: 10px;
-  padding: 20px;
-}
-
-.restaurant-image img {
-  width: 170px;
+  padding: 1rem;
+  text-align: center;
+  overflow: auto;
+  box-shadow: 3px 3px 2px 5px #00000022;
+  border-radius: 5px;
+  background-color: #ffffff88;
 }
 
 .restaurant-card:hover {
   cursor: pointer;
-  border: 1px solid #333;
+  box-shadow: 5px 5px 5px 5px #333;
+}
+
+.restaurant-image img {
+  width: 170px;
+  height: 200px;
+  object-fit: cover;
 }
 
 .search-bar {
   display: flex;
   justify-content: center;
-  margin: 10px;
+  padding: 1rem;
 }
 
 .search-button {
