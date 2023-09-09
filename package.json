@@ -2,7 +2,6 @@
   "name": "tastyorders",
   "version": "1.0.0",
   "description": "TastyOrders is a fod ordering web app created using ReactJS.",
-  "main": "app.js",
   "scripts": {
     "dev": "parcel index.html --open",
     "build": "parcel build index.html",
