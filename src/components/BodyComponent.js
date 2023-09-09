@@ -1,61 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-
-/**
- * Basic React App Layout
- * 
- * Header
- *  - Logo
- *  - Navigation
- * BODY
- *  - Search Bar
- *  - Restaurant Contianer
- *  - Restaurant Cards
- * FOOTER
- *  - Contact
- *  - Copy Right
- *  - Social Media
- *  - Links
- */
-
-const HeaderComponent = () => {
-  return (
-    <div className="header">
-      <div className="logo-container">
-        <img src="https://w7.pngwing.com/pngs/894/279/png-transparent-online-food-ordering-food-delivery-grubhub-others-food-service-logo-thumbnail.png" alt="logo" />
-      </div>
-      <div className="navigation">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/">About Us</a></li>
-          <li><a href="/">Cart</a></li>
-        </ul>
-      </div>
-
-    </div>
-  );
-};
-
-const RestaurantCardComponent = (props) => {
-  const { resData } = props;
-
-  const { cloudinaryImageId, name, avgRatingString, cuisines, areaName, costForTwo, id } = resData?.info;
-  return (
-    <div className="restaurant-card" >
-      <div className="restaurant-image">
-        <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + cloudinaryImageId} alt="restaurant" />
-      </div>
-      <div className="restaurant-details">
-        <div className="restaurant-name"><h4>{name}</h4></div>
-        <div className="restaurant-rating"><h4>Rating: {avgRatingString} stars</h4></div>
-        <div className="restaurant-cuisine"><h4>{cuisines.join(", ")}</h4></div>
-        <div className="restaurant-location"><h4>Location: {areaName}</h4></div>
-        <div className="price-for-two"><h4>{costForTwo}</h4></div>
-      </div>
-    </div>
-  );
-};
+import RestaurantCardComponent from "./RestaurantCardComponent";
 
 const resObjArray = [
   {
@@ -2228,17 +2171,4 @@ const BodyComponent = () => {
   );
 };
 
-const FooterComponent = () => { };
-
-const AppLayout = () => {
-  return (
-    <div className="app">
-      <HeaderComponent />
-      <BodyComponent />
-      <FooterComponent />
-    </ div>
-  );
-};
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+export default BodyComponent;
