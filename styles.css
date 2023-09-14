@@ -76,3 +76,38 @@ a:visited {
 .search-button {
   margin-left: 10px;
 }
+
+.shimmer-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.shimmer-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  text-align: center;
+  overflow: auto;
+  box-shadow: 3px 3px 2px 5px #00000022;
+  border-radius: 5px;
+  background-color: #ffffff88;
+  margin: 20px;
+  width: 200px;
+  height: 300px;
+}
+
+.login-btn {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #ffffff88;
+  border: 1px solid #333;
+}
+
+.login-btn:hover {
+  cursor: pointer;
+  box-shadow: 5px 5px 2px 0px #333;
+  background-color: burlywood;
+}
