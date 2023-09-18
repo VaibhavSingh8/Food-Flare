@@ -1,5 +1,6 @@
 import { LOGO_URL } from "../utils/constants";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const HeaderComponent = () => {
 
   const [btnName, setBtnName] = useState("Login"); // btnName is a state variable and setbtnName is a function to update the state variable.
@@ -11,9 +12,9 @@ const HeaderComponent = () => {
       </div>
       <div className="navigation">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/">About Us</a></li>
-          <li><a href="/">Cart</a></li>
+          <li>< Link to="/">Home</ Link></li>
+          <li>< Link to="/about">About Us</ Link></li>
+          <li>< Link to="/cart">Cart</ Link></li>
           <button className="login-btn" onClick={() =>
             btnName === "Login" ?
               setBtnName("Logout") : setBtnName("Login")}>

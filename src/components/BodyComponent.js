@@ -6,6 +6,9 @@ const BodyComponent = () => {
   // local State variable
   const [resObjArray, setResObjArray] = useState([]);
 
+  //copy of resObjArray local State variable for filtering
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+
   // local State variable for search text
   const [searchText, setSearchText] = useState("");
 
@@ -19,11 +22,15 @@ const BodyComponent = () => {
     const response = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6613353&lng=77.22749449999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
-    const jsonData = await response.json();
+    const jsonData = await response.json(); //promise
 
-    console.log(jsonData);
     //optional chaining
     setResObjArray(
+      jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
+
+    setFilteredRestaurants(
       jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
@@ -65,14 +72,14 @@ const BodyComponent = () => {
           onClick={() => {
             const restaurantSearch = resObjArray.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
             );
-            setResObjArray(restaurantSearch);
+            setFilteredRestaurants(restaurantSearch);
           }}
         >
           Search
         </button>
       </div>
       <div className="restaurant-container">
-        {resObjArray.map((resObj) => (
+        {filteredRestaurants.map((resObj) => (
           <RestaurantCardComponent key={resObj.info.id} resData={resObj} />
         ))}
       </div>
