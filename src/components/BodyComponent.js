@@ -1,6 +1,7 @@
 import RestaurantCardComponent from "./RestaurantCardComponent";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const BodyComponent = () => {
   // local State variable
@@ -41,7 +42,9 @@ const BodyComponent = () => {
   return resObjArray.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
+
+    < div className="body" >
+      {/** Filter Top restaurants */}
       <div className="filter">
         <button
           className="filter-btn"
@@ -49,12 +52,14 @@ const BodyComponent = () => {
             const filterRestaurants = resObjArray.filter(
               (res) => res.info.avgRating > 4.0
             );
-            setResObjArray(filterRestaurants);
+            setFilteredRestaurants(filterRestaurants);
           }}
         >
           Top Restaurants
         </button>
       </div>
+
+      {/** Search bar for searching restaurants */}
       <div className="search-bar">
         <input
           type="text"
@@ -66,6 +71,7 @@ const BodyComponent = () => {
           }}
         />
 
+        {/** Search restaurants */}
         <button
           type="button"
           className="search-button"
@@ -78,9 +84,10 @@ const BodyComponent = () => {
           Search
         </button>
       </div>
+      {/** Restaurant cards */}
       <div className="restaurant-container">
         {filteredRestaurants.map((resObj) => (
-          <RestaurantCardComponent key={resObj.info.id} resData={resObj} />
+          <Link key={resObj.info.id} to={"/restaurants/" + resObj.info.id} ><RestaurantCardComponent resData={resObj} /></Link>
         ))}
       </div>
     </div >
