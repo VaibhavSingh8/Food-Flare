@@ -9,6 +9,8 @@ import CartComponent from "./components/CartComponent";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
+
+
 const AppLayout = () => {
   return (
     <div className="app">

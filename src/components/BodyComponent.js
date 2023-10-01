@@ -2,6 +2,7 @@ import RestaurantCardComponent from "./RestaurantCardComponent";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useInternetStatus from "../utils/useInternetStatus";
 
 const BodyComponent = () => {
   // local State variable
@@ -12,8 +13,6 @@ const BodyComponent = () => {
 
   // local State variable for search text
   const [searchText, setSearchText] = useState("");
-
-  console.log("Body Component Rendered");
 
   useEffect(() => {
     fetchData();
@@ -37,6 +36,13 @@ const BodyComponent = () => {
     );
   };
 
+  const onlineStatus = useInternetStatus();
+
+  if (onlineStatus === false) {
+    return (
+      <h1>Oops! Looks like you are offline!! Please check your internet connection.</h1>
+    )
+  }
   // Conditional Rendering
 
   return resObjArray.length === 0 ? (
