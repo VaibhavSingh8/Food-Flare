@@ -9,12 +9,12 @@ const HeaderComponent = () => {
   const onlineStatus = useInternetStatus();
 
   return (
-    <div className="header">
+    <div className="flex ">
       <div className="logo-container">
-        <img src={LOGO_URL} alt="logo" />
+        <img className="w-24" src={LOGO_URL} alt="logo" />
       </div>
       <div className="navigation">
-        <ul>
+        <ul className="flex space-x-4 space-y-3">
           <li>{onlineStatus ? "🟢" : "🔴"}</li>
           <li>< Link to="/">Home</ Link></li>
           <li>< Link to="/about">About Us</ Link></li>
