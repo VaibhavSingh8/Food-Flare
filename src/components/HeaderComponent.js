@@ -9,17 +9,17 @@ const HeaderComponent = () => {
   const onlineStatus = useInternetStatus();
 
   return (
-    <div className="flex ">
-      <div className="logo-container">
-        <img className="w-24" src={LOGO_URL} alt="logo" />
+    <div className="flex justify-between bg-orange-50">
+      <div className="">
+        <img className="w-20 mt-2" src={LOGO_URL} alt="logo" />
       </div>
-      <div className="navigation">
-        <ul className="flex space-x-4 space-y-3">
-          <li>{onlineStatus ? "🟢" : "🔴"}</li>
-          <li>< Link to="/">Home</ Link></li>
-          <li>< Link to="/about">About Us</ Link></li>
-          <li>< Link to="/cart">Cart</ Link></li>
-          <button className="login-btn" onClick={() =>
+      <div className="flex items-center">
+        <ul className="flex p-4 m-4">
+          <li className="px-4">{onlineStatus ? "🟢" : "🔴"}</li>
+          <li className="px-4" >< Link to="/">Home</ Link></li>
+          <li className="px-4">< Link to="/about">About Us</ Link></li>
+          <li className="px-4">< Link to="/cart">Cart</ Link></li>
+          <button className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() =>
             btnName === "Login" ?
               setBtnName("Logout") : setBtnName("Login")}>
             {btnName}

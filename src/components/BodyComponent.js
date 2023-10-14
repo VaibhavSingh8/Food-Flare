@@ -40,20 +40,22 @@ const BodyComponent = () => {
 
   if (onlineStatus === false) {
     return (
-      <h1>Oops! Looks like you are offline!! Please check your internet connection.</h1>
-    )
+      <h1>
+        Oops! Looks like you are offline!! Please check your internet
+        connection.
+      </h1>
+    );
   }
   // Conditional Rendering
 
   return resObjArray.length === 0 ? (
     <Shimmer />
   ) : (
-
-    < div className="body" >
+    <div className="m-4">
       {/** Filter Top restaurants */}
       <div className="filter">
         <button
-          className="filter-btn"
+          className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
           onClick={() => {
             const filterRestaurants = resObjArray.filter(
               (res) => res.info.avgRating > 4.0
@@ -66,11 +68,11 @@ const BodyComponent = () => {
       </div>
 
       {/** Search bar for searching restaurants */}
-      <div className="search-bar">
+      <div className="search-bar m-3 p-3">
         <input
           type="text"
           placeholder="Search for restaurants"
-          className="search-box"
+          className="border border-solid border-black"
           value={searchText}
           onChange={(e) => {
             setSearchText(e.target.value);
@@ -79,8 +81,7 @@ const BodyComponent = () => {
 
         {/** Search restaurants */}
         <button
-          type="button"
-          className="search-button"
+          className="p-4 bg-orange-200 m-3"
           onClick={() => {
             const restaurantSearch = resObjArray.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
             );
