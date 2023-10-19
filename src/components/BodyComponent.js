@@ -68,11 +68,11 @@ const BodyComponent = () => {
       </div>
 
       {/** Search bar for searching restaurants */}
-      <div className="search-bar m-3 p-3">
+      <div className="m-3 p-3 flex justify-center">
         <input
           type="text"
           placeholder="Search for restaurants"
-          className="border border-solid border-black"
+          className="m-2 p-1 border border-solid border-black"
           value={searchText}
           onChange={(e) => {
             setSearchText(e.target.value);
@@ -81,7 +81,7 @@ const BodyComponent = () => {
 
         {/** Search restaurants */}
         <button
-          className="p-4 bg-orange-200 m-3"
+          className="px-4 py-1 bg-orange-200 m-3 rounded"
           onClick={() => {
             const restaurantSearch = resObjArray.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
             );
@@ -92,7 +92,7 @@ const BodyComponent = () => {
         </button>
       </div>
       {/** Restaurant cards */}
-      <div className="restaurant-container">
+      <div className="restaurant-container grid grid-cols-4">
         {filteredRestaurants.map((resObj) => (
           <Link key={resObj.info.id} to={"/restaurants/" + resObj.info.id} ><RestaurantCardComponent resData={resObj} /></Link>
         ))}
