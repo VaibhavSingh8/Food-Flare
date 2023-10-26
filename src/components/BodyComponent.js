@@ -1,4 +1,6 @@
-import RestaurantCardComponent from "./RestaurantCardComponent";
+import RestaurantCardComponent, {
+  promotedRestaurant,
+} from "./RestaurantCardComponent";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -13,6 +15,12 @@ const BodyComponent = () => {
 
   // local State variable for search text
   const [searchText, setSearchText] = useState("");
+
+  console.log("Body Rendered", resObjArray);
+
+  const PromotedRestaurantCardComponent = promotedRestaurant(
+    RestaurantCardComponent
+  );
 
   useEffect(() => {
     fetchData();
@@ -83,7 +91,8 @@ const BodyComponent = () => {
         <button
           className="px-4 py-1 bg-orange-200 m-3 rounded"
           onClick={() => {
-            const restaurantSearch = resObjArray.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
+            const restaurantSearch = resObjArray.filter((res) =>
+              res.info.name.toLowerCase().includes(searchText.toLowerCase())
             );
             setFilteredRestaurants(restaurantSearch);
           }}
@@ -94,10 +103,18 @@ const BodyComponent = () => {
       {/** Restaurant cards */}
       <div className="restaurant-container grid grid-cols-4">
         {filteredRestaurants.map((resObj) => (
-          <Link key={resObj.info.id} to={"/restaurants/" + resObj.info.id} ><RestaurantCardComponent resData={resObj} /></Link>
+          <Link key={resObj.info.id} to={"/restaurants/" + resObj.info.id}>
+            {/** If the restaurant is promoted, add a promoted label to it. */}
+
+            {resObj.info.isOpen ? (
+              <RestaurantCardComponent resData={resObj} />
+            ) : (
+              <PromotedRestaurantCardComponent resData={resObj} />
+            )}
+          </Link>
         ))}
       </div>
-    </div >
+    </div>
   );
 };
 

@@ -20,4 +20,19 @@ const RestaurantCardComponent = (props) => {
   );
 };
 
+// Higher Order Component
+
+// Input - RestaurantCardComponent => PromotedRestaurantCardComponent
+
+export const promotedRestaurant  = (RestaurantCardComponent) => { 
+  return (props) => {
+    return (
+      <div>
+      <label>Currently Closed</label>
+      <RestaurantCardComponent {...props}/>
+      </div>
+    );
+  };
+};
+
 export default RestaurantCardComponent;
