@@ -6,3 +6,5 @@
 
 # Ignore all files in the "node_modules" directory
 /.parcel-cache/
+
+/NOTES.md
