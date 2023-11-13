@@ -5,9 +5,9 @@ const RestaurantCardComponent = (props) => {
 
   const { cloudinaryImageId, name, avgRatingString, cuisines, areaName, costForTwo, id } = resData?.info;
   return (
-    <div className="restaurant-card m-4 p-4" >
-      <div className="restaurant-image">
-        <img className = "h-60 w-64" src={IMG_URL + cloudinaryImageId} alt="restaurant" />
+    <div className="restaurant-card m-4 p-4 bg-blue-100" >
+      <div className="restaurant-image ">
+        <img className="h-60 w-64 rounded-lg" src={IMG_URL + cloudinaryImageId} alt="restaurant" />
       </div>
       <div className="restaurant-details mt-2">
         <div className="restaurant-name font-bold py-2"><h3>{name}</h3></div>
@@ -24,12 +24,12 @@ const RestaurantCardComponent = (props) => {
 
 // Input - RestaurantCardComponent => PromotedRestaurantCardComponent
 
-export const promotedRestaurant  = (RestaurantCardComponent) => { 
+export const promotedRestaurant = (RestaurantCardComponent) => {
   return (props) => {
     return (
       <div>
-      <label>Currently Closed</label>
-      <RestaurantCardComponent {...props}/>
+        <label>Currently Closed</label>
+        <RestaurantCardComponent {...props} />
       </div>
     );
   };
