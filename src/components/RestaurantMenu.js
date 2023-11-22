@@ -1,4 +1,5 @@
 import Shimmer from "./Shimmer";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantCategoryComponent from "./RestaurantCategoryComponent";
@@ -8,6 +9,8 @@ const RestaurantMenu = () => {
   const { resId } = useParams();
 
   const resInfo = useRestaurantMenu(resId);
+
+  const [expandItems, setExpandItems] = useState(0);
 
   if (resInfo === null) return <Shimmer />;
 
@@ -28,24 +31,11 @@ const RestaurantMenu = () => {
 
       {/* Categries Accordion */}
 
-      {categories.map((category) => (
-        <RestaurantCategoryComponent data={category?.card?.card} />
+      {categories.map((category, index) => (
+        // Controlled component
+        <RestaurantCategoryComponent key={category?.card?.card?.title} data={category?.card?.card} showItems={index === expandItems ? true : false} setExpandItems={() => setExpandItems(index)} />
       ))}
     </div>
-    // <div className="menu">
-    //   <h1>{name}</h1>
-    //   <h3>
-    //     {cuisines.join(", ")} - {costForTwoMessage}
-    //   </h3>
-    //   <ul>
-    //     {itemCards.map((item) => (
-    //       <li key={item.card.info.id}>
-    //         {item.card.info.name} - {"Rs. "}
-    //         {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </div>
   );
 };
 
