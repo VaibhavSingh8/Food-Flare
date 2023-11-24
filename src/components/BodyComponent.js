@@ -6,7 +6,9 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useInternetStatus from "../utils/useInternetStatus";
 
+
 const BodyComponent = () => {
+
   // local State variable
   const [resObjArray, setResObjArray] = useState([]);
 
