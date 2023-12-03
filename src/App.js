@@ -8,16 +8,19 @@ import AboutComponent from "./components/AboutComponent";
 import CartComponent from "./components/CartComponent";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 
 const AppLayout = () => {
   return (
-    <div className="app">
-      <HeaderComponent />
-      <Outlet />
-      <FooterComponent />
-    </ div>
+    <Provider store={appStore}>
+      <div>
+        <HeaderComponent />
+        <Outlet />
+        <FooterComponent />
+      </ div>
+    </Provider >
   );
 };
 
