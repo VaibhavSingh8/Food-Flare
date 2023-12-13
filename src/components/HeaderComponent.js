@@ -13,7 +13,7 @@ const HeaderComponent = () => {
   const cartItems = useSelector((store) => store.cart.items);
 
   return (
-    <div className="flex justify-between bg-orange-50">
+    <div className="flex justify-between bg-orange-50 sticky top-0">
       <div className="">
         <img className="w-20 mt-2" src={LOGO_URL} alt="logo" />
       </div>

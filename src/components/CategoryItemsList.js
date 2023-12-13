@@ -1,15 +1,26 @@
 import { IMG_URL } from "../utils/constants";
+import { addItemsToCart } from "../utils/cartSlice"
+import { useDispatch } from "react-redux";
 
 const CategoryItemsList = ({ items }) => {
 
-  console.log(items)
+  const dispatch = useDispatch();
+
+  const handleAddItems = (item) => {
+    // dispatch action on button click
+    dispatch(addItemsToCart(item));
+  };
   return (
     <div>
       {items.map((item) => (
         <div key={item.card.info.id} className="p-2 m-2 border-b-2 flex justify-between">
           <div className="w-3/12 p-4">
+            <div className="absolute">
+              <button className="bg-black text-white rounded-lg p-2 mx-6 shadow-lg" onClick={() => handleAddItems(item)} >Add +</button>
+            </div>
             <img src={IMG_URL + item.card.info.imageId} alt="restaurant" />
           </div>
+
           <div className="w-9/12">
             <div className="py-2 ">
               <span>{item.card.info.name}</span>
