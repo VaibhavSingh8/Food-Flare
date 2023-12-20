@@ -16,9 +16,9 @@ const CategoryItemsList = ({ items }) => {
         <div key={item.card.info.id} className="p-2 m-2 border-b-2 flex justify-between">
           <div className="w-3/12 p-4">
             <div className="absolute">
-              <button className="bg-black text-white rounded-lg p-2 mx-6 shadow-lg" onClick={() => handleAddItems(item)} >Add +</button>
+              <button className="bg-white text-green-500 rounded-lg p-2 mx-6 shadow-lg" onClick={() => handleAddItems(item)} >Add +</button>
             </div>
-            <img src={IMG_URL + item.card.info.imageId} alt="restaurant" />
+            <img className="w-32 h-24" src={IMG_URL + item.card.info.imageId} alt="restaurant" />
           </div>
 
           <div className="w-9/12">
