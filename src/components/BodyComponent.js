@@ -106,6 +106,7 @@ const BodyComponent = () => {
       <div className="restaurant-container grid grid-cols-4">
         {filteredRestaurants.map((resObj) => (
           <Link key={resObj.info.id} to={"/restaurants/" + resObj.info.id}>
+
             {/** If the restaurant is promoted, add a promoted label to it. */}
 
             {resObj.info.isOpen ? (
