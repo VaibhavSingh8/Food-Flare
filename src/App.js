@@ -7,6 +7,7 @@ import ErrorComponent from "./components/ErrorComponent";
 import AboutComponent from "./components/AboutComponent";
 import CartComponent from "./components/CartComponent";
 import RestaurantMenu from "./components/RestaurantMenu";
+import Footer from "./components/Footer";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
@@ -18,7 +19,7 @@ const AppLayout = () => {
       <div>
         <HeaderComponent />
         <Outlet />
-        <FooterComponent />
+        <Footer />
       </ div>
     </Provider >
   );
