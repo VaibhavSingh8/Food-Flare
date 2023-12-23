@@ -18,11 +18,6 @@ const BodyComponent = () => {
   // local State variable for search text
   const [searchText, setSearchText] = useState("");
 
-  // console.log("Body Rendered", resObjArray);
-
-  const PromotedRestaurantCardComponent = promotedRestaurant(
-    RestaurantCardComponent
-  );
 
   useEffect(() => {
     fetchData();
@@ -67,10 +62,10 @@ const BodyComponent = () => {
         <button
           className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
           onClick={() => {
-            const filterRestaurants = resObjArray.filter(
+            const highRatedRestaurants = resObjArray.filter(
               (res) => res.info.avgRating > 4.0
             );
-            setFilteredRestaurants(filterRestaurants);
+            setFilteredRestaurants(highRatedRestaurants);
           }}
         >
           Top Restaurants
@@ -85,12 +80,12 @@ const BodyComponent = () => {
           className="m-2 p-1 border border-solid border-black"
           value={searchText}
           onChange={(e) => {
-            setSearchText(e.target.value);
+            setSearchText(e.target.value.toLowerCase());
           }}
         />
 
         {/** Search restaurants */}
-        <button
+        {/* <button
           className="px-4 py-1 bg-orange-200 m-3 rounded"
           onClick={() => {
             const restaurantSearch = resObjArray.filter((res) =>
@@ -100,20 +95,14 @@ const BodyComponent = () => {
           }}
         >
           Search
-        </button>
+        </button> */}
       </div>
       {/** Restaurant cards */}
       <div className="restaurant-container grid grid-cols-4">
         {filteredRestaurants.map((resObj) => (
           <Link key={resObj.info.id} to={"/restaurants/" + resObj.info.id}>
+            <RestaurantCardComponent resData={resObj} />
 
-            {/** If the restaurant is promoted, add a promoted label to it. */}
-
-            {resObj.info.isOpen ? (
-              <RestaurantCardComponent resData={resObj} />
-            ) : (
-              <PromotedRestaurantCardComponent resData={resObj} />
-            )}
           </Link>
         ))}
       </div>
