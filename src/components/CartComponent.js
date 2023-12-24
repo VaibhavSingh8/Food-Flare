@@ -2,6 +2,7 @@ import CategoryItemsList from "./CategoryItemsList";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../utils/cartSlice";
 
+
 const CartComponent = () => {
 
   //subscribing to store for cart items
