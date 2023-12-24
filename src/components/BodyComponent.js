@@ -1,6 +1,4 @@
-import RestaurantCardComponent, {
-  promotedRestaurant,
-} from "./RestaurantCardComponent";
+import RestaurantCardComponent from "./RestaurantCardComponent";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -78,11 +76,27 @@ const BodyComponent = () => {
           type="text"
           placeholder="Search for restaurants"
           className="m-2 p-1 border border-solid border-black"
-          value={searchText}
+          //value={searchText}
           onChange={(e) => {
+            console.log(e.target.value);
             setSearchText(e.target.value.toLowerCase());
+            const restaurantSearch = resObjArray.filter((res) =>
+              res.info.name.toLowerCase().includes(searchText)
+            );
+            setFilteredRestaurants(restaurantSearch);
           }}
         />
+
+        {/** Clear search text */}
+        <button
+          className="px-4 py-1 bg-orange-200 m-3 rounded"
+          onClick={() => {
+            setSearchText("");
+            setFilteredRestaurants(resObjArray);
+          }}
+        >
+          Clear
+        </button>
 
         {/** Search restaurants */}
         {/* <button
@@ -102,7 +116,6 @@ const BodyComponent = () => {
         {filteredRestaurants.map((resObj) => (
           <Link key={resObj.info.id} to={"/restaurants/" + resObj.info.id}>
             <RestaurantCardComponent resData={resObj} />
-
           </Link>
         ))}
       </div>
