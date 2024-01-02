@@ -23,18 +23,18 @@ const BodyComponent = () => {
 
   const fetchData = async () => {
     const response = await fetch(
-      "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6613353&lng=77.22749449999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.61129608341754&lng=77.44435027241707&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const jsonData = await response.json(); //promise
 
     //optional chaining
     setResObjArray(
-      jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+      jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
 
     setFilteredRestaurants(
-      jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+      jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
   };
