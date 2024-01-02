@@ -7,11 +7,27 @@ const cartSlice = createSlice({
   },
   reducers: {
     addItemsToCart: (state, action) => {
-      //mutating the state here i.e., modifying the existing state directly
-      state.items.push(action.payload);
+      const existingItem = state.items.find(item => item.card.info.id === action.payload.id);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        state.items.push({ ...action.payload, quantity: 1 });
+      }
     },
-    removeItemsFromCart: (state) => {
-      state.items.pop()
+    removeItemsFromCart: (state, action) => {
+      // Find the index of the item in the cart
+      const index = state.items.findIndex(item => item.id === action.payload.id);
+
+      if (index !== -1) {
+        // If the item is in the cart, decrease its quantity
+        state.items[index].quantity -= 1;
+
+        // If the quantity becomes 0, remove the item from the cart
+        if (state.items[index].quantity === 0) {
+          state.items.splice(index, 1);
+        }
+      }
     },
     clearCart: (state) => {
       state.items.length = 0;

@@ -4,32 +4,36 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 const CategoryItemsList = ({ items }) => {
-  const [itemQuantity, setItemQuantity] = useState(0);
+
+  const [itemQuantity, setItemQuantity] = useState(() => {
+    const itemQuantity = {};
+    items.forEach(item => {
+      itemQuantity[item.card.info.id] = 0;
+    });
+    return itemQuantity;
+  });
 
   const dispatch = useDispatch();
 
   // Handle adding items to cart
   const handleAddItems = (item) => {
 
-    //const currentQuantity = itemQuantity[item.card.info.id] || 0;
+    let currentQuantity = itemQuantity[item.card.info.id];
 
-    // dispatch addItem action on button click
+    setItemQuantity({ ...itemQuantity, [item.card.info.id]: currentQuantity + 1 });
+
     dispatch(addItemsToCart(item));
-    setItemQuantity(itemQuantity + 1);
-    //update the item quantity state
-    //setItemQuantity({ ...itemQuantity, [item.card.info.id]: itemQuantity + 1 });
   };
 
   const handleRemoveItems = (item) => {
 
-    //const currentQuantity = itemQuantity[item.card.info.id] || 0;
+    const currentQuantity = itemQuantity[item.card.info.id] || 0;
 
-    if (itemQuantity > 0) {
+    if (currentQuantity > 0) {
       // dispatch removeItem action on button click
       dispatch(removeItemsFromCart(item));
-      //update quantity
-      setItemQuantity(itemQuantity + 1);
-      //setItemQuantity({ ...itemQuantity, [item.card.info.id]: itemQuantity - 1 });
+      // update the item quantity state
+      setItemQuantity({ ...itemQuantity, [item.card.info.id]: currentQuantity - 1 });
     }
     return;
   };
@@ -63,7 +67,9 @@ const CategoryItemsList = ({ items }) => {
               >
                 +
               </button>
-              {itemQuantity === 0 ? "ADD" : itemQuantity}
+
+              {itemQuantity[item.card.info.id] === 0 ? "ADD" : itemQuantity[item.card.info.id]}
+
               <button
 
                 onClick={() => handleRemoveItems(item)}
