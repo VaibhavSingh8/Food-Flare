@@ -6,6 +6,8 @@ const RestaurantCategoryComponent = ({ data, showItems, setExpandItems }) => {
     setExpandItems();
   }
 
+  const qw = {};
+
   return <div>
     {/* Header */}
     <div className="w-8/12 mx-auto my-4 bg-gray-50 shadow-lg p-4 ">
@@ -14,7 +16,7 @@ const RestaurantCategoryComponent = ({ data, showItems, setExpandItems }) => {
       </div>
 
       { /* Body*/}
-      {showItems && <CategoryItemsList items={data.itemCards} />}
+      {showItems && <CategoryItemsList items={data.itemCards} quant={qw} />}
     </div>
   </div>
 }

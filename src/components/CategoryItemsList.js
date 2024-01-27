@@ -3,37 +3,80 @@ import { addItemsToCart, removeItemsFromCart } from "../utils/cartSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
-const CategoryItemsList = ({ items }) => {
+const CategoryItemsList = ({ items, quant }) => {
 
   const [itemQuantity, setItemQuantity] = useState(() => {
-    const itemQuantity = {};
-    items.forEach(item => {
-      itemQuantity[item.card.info.id] = 0;
-    });
+    let itemQuantity = {};
+    // console.log(quant, "quant");
+    if (Object.keys(quant).length === 0) {
+      items.forEach(item => {
+        itemQuantity[item.card.info.id] = 0;
+      });
+    }
+    else {
+      itemQuantity = quant;
+    }
+    console.log(itemQuantity, "itemQuantity");
     return itemQuantity;
   });
 
-  const dispatch = useDispatch();
 
-  // Handle adding items to cart
+  // const [itemQuantity, setItemQuantity] = useState(0);
+  const dispatch = useDispatch();
+  items.forEach(item => {
+    item.quantity = 0;
+  });
+  //Handle adding items to cart
   const handleAddItems = (item) => {
 
     let currentQuantity = itemQuantity[item.card.info.id];
 
-    setItemQuantity({ ...itemQuantity, [item.card.info.id]: currentQuantity + 1 });
+    let newQuantity = currentQuantity + 1;
 
-    dispatch(addItemsToCart(item));
+    setItemQuantity((prevItemQuantity) => {
+
+      const newItemQuantity = { ...prevItemQuantity };
+
+      newItemQuantity[item.card.info.id] = newQuantity;
+      console.log(newItemQuantity, "newItemQuantity");
+      return newItemQuantity;
+    });
+
+    // const updatedItems = newItems.map((i) => {
+    //   if (i.card.info.id === item.card.info.id) {
+    //     return { ...i, quantity: (i.quantity || 0) + 1 };
+    //   } else {
+    //     return i;
+    //   }
+    // });
+
+    // setItems(updatedItems);
+    dispatch(addItemsToCart({ item, itemQuantity }));
   };
 
   const handleRemoveItems = (item) => {
 
-    const currentQuantity = itemQuantity[item.card.info.id] || 0;
+    let currentQuantity = itemQuantity[item.card.info.id];
 
     if (currentQuantity > 0) {
+
+      let newCurrentQuantity = currentQuantity - 1;
+
+      // update the item quantity state
+      setItemQuantity(() => ({ ...itemQuantity, [item.card.info.id]: newCurrentQuantity }));
+
+      // const updatedItems = newItems.map((i) => {
+      //   if (i.card.info.id === item.card.info.id) {
+      //     return { ...i, quantity: i.quantity - 1 };
+      //   } else {
+      //     return i;
+      //   }
+      // });
+
+      // setItems(updatedItems);
+
       // dispatch removeItem action on button click
       dispatch(removeItemsFromCart(item));
-      // update the item quantity state
-      setItemQuantity({ ...itemQuantity, [item.card.info.id]: currentQuantity - 1 });
     }
     return;
   };
