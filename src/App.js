@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import HeaderComponent from "./components/HeaderComponent";
 import BodyComponent from "./components/BodyComponent";
-import FooterComponent from "./components/FooterComponent";
 import ErrorComponent from "./components/ErrorComponent";
 import AboutComponent from "./components/AboutComponent";
 import CartComponent from "./components/CartComponent";

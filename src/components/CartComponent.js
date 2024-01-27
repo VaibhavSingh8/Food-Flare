@@ -1,4 +1,4 @@
-import CategoryItemsList from "./CategoryItemsList";
+import ItemsCategoryList from "./ItemsCategoryList";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../utils/cartSlice";
 
@@ -24,7 +24,7 @@ const CartComponent = () => {
         {cartItems.length === 0 && (
           <h1>Oops! The cart is empty. Please add some Items to your cart!</h1>
         )}
-        <CategoryItemsList items={cartItems} quant={itemQuantity} />
+        <ItemsCategoryList items={cartItems} quant={itemQuantity} />
       </div>
     </div>
   );
