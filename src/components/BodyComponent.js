@@ -23,7 +23,7 @@ const BodyComponent = () => {
 
   const fetchData = async () => {
     const response = await fetch(
-      "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.61129608341754&lng=77.44435027241707&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://corsproxy.org/?https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D28.61129608341754%26lng%3D77.44435027241707%26is-seo-homepage-enabled%3Dtrue%26page_type%3DDESKTOP_WEB_LISTING"
     );
     const jsonData = await response.json(); //promise
 
@@ -97,19 +97,6 @@ const BodyComponent = () => {
         >
           Clear
         </button>
-
-        {/** Search restaurants */}
-        {/* <button
-          className="px-4 py-1 bg-orange-200 m-3 rounded"
-          onClick={() => {
-            const restaurantSearch = resObjArray.filter((res) =>
-              res.info.name.toLowerCase().includes(searchText.toLowerCase())
-            );
-            setFilteredRestaurants(restaurantSearch);
-          }}
-        >
-          Search
-        </button> */}
       </div>
       {/** Restaurant cards */}
       <div className="restaurant-container grid grid-cols-4">

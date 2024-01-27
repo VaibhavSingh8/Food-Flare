@@ -7,6 +7,7 @@ const CartComponent = () => {
 
   //subscribing to store for cart items
   const cartItems = useSelector((store) => store.cart.items);
+  const itemQuantity = useSelector((store) => store.cart.itemQ);
   const dispatch = useDispatch();
 
   const handleClearCart = () => {
@@ -23,7 +24,7 @@ const CartComponent = () => {
         {cartItems.length === 0 && (
           <h1>Oops! The cart is empty. Please add some Items to your cart!</h1>
         )}
-        <CategoryItemsList items={cartItems} />
+        <CategoryItemsList items={cartItems} quant={itemQuantity} />
       </div>
     </div>
   );
