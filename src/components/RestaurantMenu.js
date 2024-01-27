@@ -2,7 +2,8 @@ import Shimmer from "./Shimmer";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
-import RestaurantCategoryComponent from "./RestaurantCategoryComponent";
+import RestaurantCategory from "./RestaurantCategory";
+import ItemsShimmer from "./ItemsShimmer";
 
 const RestaurantMenu = () => {
 
@@ -12,7 +13,9 @@ const RestaurantMenu = () => {
 
   const [expandItems, setExpandItems] = useState(null);
 
-  if (resInfo === null) return <Shimmer />;
+  if (resInfo === null) {
+    return <ItemsShimmer />;
+  }
 
   console.log(resInfo)
 
@@ -34,7 +37,7 @@ const RestaurantMenu = () => {
 
       {categories.map((category, index) => (
         // Controlled component
-        <RestaurantCategoryComponent key={category?.card?.card?.title} data={category?.card?.card} showItems={index === expandItems ? true : false} setExpandItems={() => setExpandItems(index)} />
+        <RestaurantCategory key={category?.card?.card?.title} data={category?.card?.card} showItems={index === expandItems ? true : false} setExpandItems={() => setExpandItems(index)} />
       ))}
     </div>
   );

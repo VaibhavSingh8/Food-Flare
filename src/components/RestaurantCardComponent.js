@@ -11,7 +11,7 @@ const RestaurantCardComponent = (props) => {
         <div className="font-bold text-xl mb-2">{name.length > 15 ? name.slice(0, 15) + "..." : name.slice(0, 15)}</div>
         <div className="restaurant-rating"><h4>Rating: {avgRatingString} ⭐</h4></div>
         <div className="restaurant-cuisine"><h4>{cuisines.slice(0, 2).join(", ")}{cuisines.length > 2 ? "..." : ""}</h4></div>
-        <div className="restaurant-location"><h4>Location: {areaName}</h4></div>
+        <div className="restaurant-location"><h4>Location: {areaName.length > 15 ? areaName.slice(0, 15) + "..." : areaName.slice(0, 15)}</h4></div>
         <div className="price-for-two"><h4>{costForTwo}</h4></div>
       </div>
     </div>

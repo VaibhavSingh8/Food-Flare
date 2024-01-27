@@ -3,7 +3,7 @@ import { addItemsToCart, removeItemsFromCart } from "../utils/cartSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
-const CategoryItemsList = ({ items, quant }) => {
+const ItemsCategoryList = ({ items, quant }) => {
 
   const [itemQuantity, setItemQuantity] = useState(() => {
     let itemQuantity = {};
@@ -128,4 +128,4 @@ const CategoryItemsList = ({ items, quant }) => {
   );
 };
 
-export default CategoryItemsList;
+export default ItemsCategoryList;
