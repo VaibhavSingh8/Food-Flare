@@ -8,6 +8,12 @@ const HeaderComponent = () => {
 
   const [btnName, setBtnName] = useState("Login");
 
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   const onlineStatus = useInternetStatus();
 
   //Subscribe to the store using Selector
@@ -19,20 +25,19 @@ const HeaderComponent = () => {
         < Link to="/"><img className="w-24 mt-1" src={logo} alt="logo" /></ Link>
       </div>
 
-      <div className="flex items-center">
+      <div className="hidden sm:flex items-center">
         <ul className="flex p-4 m-4 items-center ">
           <li className="px-4 ">{onlineStatus ? "🟢" : "🔴"}</li>
           <li className="px-4 hover:text-orange-500" >< Link to="/">Home</ Link></li>
           <li className="px-4 hover:text-orange-500">< Link to="/about">About Us</ Link></li>
           <li className="px-4 hover:text-orange-500">< Link to="/cart">🛒: ({cartItems.length} items)</ Link></li>
-          <button className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() =>
+          {/* <button className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() =>
             btnName === "Login" ?
               setBtnName("Logout") : setBtnName("Login")}>
             {btnName}
-          </button>
+          </button> */}
         </ul>
       </div>
-
     </div>
   );
 };

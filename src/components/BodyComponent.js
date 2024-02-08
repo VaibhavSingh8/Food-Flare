@@ -1,4 +1,3 @@
-import { Client } from 'appwrite';
 import RestaurantCardComponent from "./RestaurantCardComponent";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
@@ -17,20 +16,21 @@ const BodyComponent = () => {
   // local State variable for search text
   const [searchText, setSearchText] = useState("");
 
-  const client = new Client();
-
-  client
-    .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject('65b4f145e041657d95ce');
-
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (searchText.length === 0) {
+      setFilteredRestaurants(resObjArray);
+    }
+  }, [searchText])
 
   const fetchData = async () => {
     const response = await fetch(
       "https://corsproxy.org/?https%3A%2F%2F65b4f285b6b7261e8f76.appwrite.global%2F"
     );
+
     const jsonData = await response.json(); //promise
 
     //optional chaining
@@ -63,16 +63,15 @@ const BodyComponent = () => {
   ) : (
     < >
       {/** Filter Top restaurants */}
-      <div className="m-4 p-2 flex justify-between mx-10 md:mx-28">
+      <div className="m-4 p-2 sm:flex justify-between sm:mx-10 md:mx-28">
 
-        <div className=" flex">
+        <div className="flex">
           <input
             type="text"
             placeholder="Search for restaurants"
-            className="m-2 p-1 border border-solid border-grey-200"
+            className="m-2 p-1 border-solid border border-gray-300"
             //value={searchText}
             onChange={(e) => {
-              console.log(e.target.value);
               setSearchText(e.target.value.toLowerCase());
               const restaurantSearch = resObjArray.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText)
@@ -92,21 +91,35 @@ const BodyComponent = () => {
             Clear
           </button> */}
         </div>
+        <div>
+          <button
+            className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-3 py-2 border border-blue-500 hover:border-transparent rounded mx-2 mt-1.5"
+            onClick={() => {
+              const highRatedRestaurants = resObjArray.filter(
+                (res) => res.info.avgRating > 4.0
+              );
+              setFilteredRestaurants(highRatedRestaurants);
+            }}
+          >
+            Top Restaurants
+          </button>
 
-        <button
-          className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-2 border border-blue-500 hover:border-transparent rounded"
-          onClick={() => {
-            const highRatedRestaurants = resObjArray.filter(
-              (res) => res.info.avgRating > 4.0
-            );
-            setFilteredRestaurants(highRatedRestaurants);
-          }}
-        >
-          Top Restaurants
-        </button>
+          <button
+            className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-3 py-2 border border-blue-500 hover:border-transparent rounded mx-2 mt-1.5"
+            onClick={() => {
+
+              const highRatedRestaurants = [...filteredRestaurants].sort((a, b) => {
+                return a.info.costForTwo.localeCompare(b.info.costForTwo);
+              });
+              console.log(highRatedRestaurants);
+              setFilteredRestaurants(highRatedRestaurants);
+              console.log(filteredRestaurants);
+            }}
+          >
+            Cost For Two
+          </button>
+        </div>
       </div>
-
-
 
       {/** Restaurant cards */}
       <div className="restaurant-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
