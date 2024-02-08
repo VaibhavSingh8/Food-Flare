@@ -16,6 +16,9 @@ const BodyComponent = () => {
   // local State variable for search text
   const [searchText, setSearchText] = useState("");
 
+  const [isActiveTopRestaurants, setIsActiveTopRestaurants] = useState(true);
+  const [isActiveCostForTwo, setIsActiveCostForTwo] = useState(true);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -98,7 +101,9 @@ const BodyComponent = () => {
               const highRatedRestaurants = resObjArray.filter(
                 (res) => res.info.avgRating > 4.0
               );
-              setFilteredRestaurants(highRatedRestaurants);
+
+              setIsActiveTopRestaurants(!isActiveTopRestaurants);
+              isActiveTopRestaurants ? setFilteredRestaurants(highRatedRestaurants) : setFilteredRestaurants(resObjArray);
             }}
           >
             Top Restaurants
@@ -111,9 +116,11 @@ const BodyComponent = () => {
               const highRatedRestaurants = [...filteredRestaurants].sort((a, b) => {
                 return a.info.costForTwo.localeCompare(b.info.costForTwo);
               });
-              console.log(highRatedRestaurants);
-              setFilteredRestaurants(highRatedRestaurants);
-              console.log(filteredRestaurants);
+
+              setIsActiveCostForTwo(!isActiveCostForTwo);
+
+              isActiveCostForTwo ? setFilteredRestaurants(highRatedRestaurants) : setFilteredRestaurants(resObjArray);
+
             }}
           >
             Cost For Two
