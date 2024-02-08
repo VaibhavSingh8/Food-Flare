@@ -1,6 +1,6 @@
 # Food Flare
 
-Food Flare is a web application built with React, Tailwind CSS, and Redux. It allows users to [briefly describe what your application does or its main features].
+Food Flare is a food ordering web application built with React, Tailwind CSS, and Redux. It allows users to order food from their favourite restaurants(!actually).
 
 ## Installation
 
