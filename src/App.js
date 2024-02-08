@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import HeaderComponent from "./components/HeaderComponent";
 import BodyComponent from "./components/BodyComponent";
 import ErrorComponent from "./components/ErrorComponent";
-import AboutComponent from "./components/AboutComponent";
+import AboutUs from "./components/AboutUs";
 import CartComponent from "./components/CartComponent";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Footer from "./components/Footer";
@@ -36,7 +36,7 @@ const appRoute = createBrowserRouter(
         },
         {
           path: "/about",
-          element: <AboutComponent />,
+          element: <AboutUs />,
         },
         {
           path: "/cart",
