@@ -1,3 +1,4 @@
+import { Client } from 'appwrite';
 import RestaurantCardComponent from "./RestaurantCardComponent";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
@@ -16,6 +17,11 @@ const BodyComponent = () => {
   // local State variable for search text
   const [searchText, setSearchText] = useState("");
 
+  const client = new Client();
+
+  client
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject('65b4f145e041657d95ce');
 
   useEffect(() => {
     fetchData();
@@ -23,7 +29,7 @@ const BodyComponent = () => {
 
   const fetchData = async () => {
     const response = await fetch(
-      "https://corsproxy.org/?https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D28.61129608341754%26lng%3D77.44435027241707%26is-seo-homepage-enabled%3Dtrue%26page_type%3DDESKTOP_WEB_LISTING"
+      "https://corsproxy.org/?https%3A%2F%2F65b4f285b6b7261e8f76.appwrite.global%2F"
     );
     const jsonData = await response.json(); //promise
 
@@ -38,6 +44,7 @@ const BodyComponent = () => {
         ?.restaurants
     );
   };
+
 
   const onlineStatus = useInternetStatus();
 
@@ -56,27 +63,13 @@ const BodyComponent = () => {
   ) : (
     < >
       {/** Filter Top restaurants */}
-      <div className="m-4 p-2 flex">
+      <div className="m-4 p-2 flex justify-between mx-10 md:mx-28">
 
-        <button
-          className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded"
-          onClick={() => {
-            const highRatedRestaurants = resObjArray.filter(
-              (res) => res.info.avgRating > 4.0
-            );
-            setFilteredRestaurants(highRatedRestaurants);
-          }}
-        >
-          Top Restaurants
-        </button>
-
-
-
-        <div className=" flex justify-center mx-auto">
+        <div className=" flex">
           <input
             type="text"
             placeholder="Search for restaurants"
-            className="m-2 p-1 border border-solid border-grey-100"
+            className="m-2 p-1 border border-solid border-grey-200"
             //value={searchText}
             onChange={(e) => {
               console.log(e.target.value);
@@ -89,7 +82,7 @@ const BodyComponent = () => {
           />
 
           {/** Clear search text */}
-          <button
+          {/* <button
             className="px-4 py-1 bg-orange-200 m-3 rounded"
             onClick={() => {
               setSearchText("");
@@ -97,14 +90,26 @@ const BodyComponent = () => {
             }}
           >
             Clear
-          </button>
+          </button> */}
         </div>
+
+        <button
+          className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-2 border border-blue-500 hover:border-transparent rounded"
+          onClick={() => {
+            const highRatedRestaurants = resObjArray.filter(
+              (res) => res.info.avgRating > 4.0
+            );
+            setFilteredRestaurants(highRatedRestaurants);
+          }}
+        >
+          Top Restaurants
+        </button>
       </div>
 
 
 
       {/** Restaurant cards */}
-      <div className="restaurant-container grid grid-cols-4">
+      <div className="restaurant-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {filteredRestaurants.map((resObj) => (
           <Link key={resObj.info.id} to={"/restaurants/" + resObj.info.id}>
             <RestaurantCardComponent resData={resObj} />
