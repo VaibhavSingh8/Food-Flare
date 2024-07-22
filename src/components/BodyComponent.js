@@ -4,9 +4,7 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useInternetStatus from "../utils/useInternetStatus";
 
-
 const BodyComponent = () => {
-
   // local State variable
   const [resObjArray, setResObjArray] = useState([]);
 
@@ -27,11 +25,11 @@ const BodyComponent = () => {
     if (searchText.length === 0) {
       setFilteredRestaurants(resObjArray);
     }
-  }, [searchText])
+  }, [searchText]);
 
   const fetchData = async () => {
     const response = await fetch(
-      "https://corsproxy.org/?https%3A%2F%2F65b4f285b6b7261e8f76.appwrite.global%2F"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.61129608341754&lng=77.44435027241707&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
 
     const jsonData = await response.json(); //promise
@@ -48,7 +46,6 @@ const BodyComponent = () => {
     );
   };
 
-
   const onlineStatus = useInternetStatus();
 
   if (onlineStatus === false) {
@@ -64,10 +61,9 @@ const BodyComponent = () => {
   return resObjArray.length === 0 ? (
     <Shimmer />
   ) : (
-    < >
+    <>
       {/** Filter Top restaurants */}
       <div className="m-4 p-2 sm:flex justify-between sm:mx-10 md:mx-28">
-
         <div className="flex">
           <input
             type="text"
@@ -103,7 +99,9 @@ const BodyComponent = () => {
               );
 
               setIsActiveTopRestaurants(!isActiveTopRestaurants);
-              isActiveTopRestaurants ? setFilteredRestaurants(highRatedRestaurants) : setFilteredRestaurants(resObjArray);
+              isActiveTopRestaurants
+                ? setFilteredRestaurants(highRatedRestaurants)
+                : setFilteredRestaurants(resObjArray);
             }}
           >
             Top Restaurants
@@ -112,15 +110,17 @@ const BodyComponent = () => {
           <button
             className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-3 py-2 border border-blue-500 hover:border-transparent rounded mx-2 mt-1.5"
             onClick={() => {
-
-              const highRatedRestaurants = [...filteredRestaurants].sort((a, b) => {
-                return a.info.costForTwo.localeCompare(b.info.costForTwo);
-              });
+              const highRatedRestaurants = [...filteredRestaurants].sort(
+                (a, b) => {
+                  return a.info.costForTwo.localeCompare(b.info.costForTwo);
+                }
+              );
 
               setIsActiveCostForTwo(!isActiveCostForTwo);
 
-              isActiveCostForTwo ? setFilteredRestaurants(highRatedRestaurants) : setFilteredRestaurants(resObjArray);
-
+              isActiveCostForTwo
+                ? setFilteredRestaurants(highRatedRestaurants)
+                : setFilteredRestaurants(resObjArray);
             }}
           >
             Cost For Two
